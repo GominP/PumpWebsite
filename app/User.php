@@ -12,6 +12,10 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function orderLists(){
+        return $this->hasMany(OrderList::class);
+    }
+
     use Notifiable;
 
     /**

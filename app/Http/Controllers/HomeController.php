@@ -20,11 +20,11 @@ class HomeController extends Controller
     {
         return view('service');
     }
-
-    public function allProduct()
-    {
-        return view('allProduct');
-    }
+//
+//    public function allProduct()
+//    {
+//        return view('allProduct');
+//    }
 
 
 

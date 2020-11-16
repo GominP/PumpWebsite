@@ -22,7 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/service', 'HomeController@service')->name('service');
 Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/allProduct', 'HomeController@allProduct')->name('allProduct');
+Route::get('/allProduct', 'Productcontroller@index')->name('product.index');
 
 
 

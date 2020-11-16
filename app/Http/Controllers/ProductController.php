@@ -14,7 +14,26 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        $types = Product::all()->where('type');
+
+        return view('product.index',[
+            'types' => $types,
+            'product' => $products
+        ]);
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function selectType($id)
+    {
+        $products = Product::all();
+        $type = Product::all()->where('type');
     }
 
     /**
@@ -22,6 +41,8 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function create()
     {
         //
@@ -46,7 +67,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+
     }
 
     /**
