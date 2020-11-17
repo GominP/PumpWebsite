@@ -4,22 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $products = Product::all();
-        $types = Product::all()->where('type');
+        $name_types = DB::table('products')->select('type')->distinct('type')->get();
+        $types = Product::get()->where('type',$id);
+
+
 
         return view('product.index',[
             'types' => $types,
-            'product' => $products
+            'products' => $name_types
         ]);
     }
 
@@ -33,7 +37,14 @@ class ProductController extends Controller
     public function selectType($id)
     {
         $products = Product::all();
-        $type = Product::all()->where('type');
+        $types = Product::get()->where('type','=',$id->type);
+
+        error_log($types);
+
+//        return view('product.index',[
+//            'types' => $types,
+//            'products' => $products
+//        ]);
     }
 
     /**
