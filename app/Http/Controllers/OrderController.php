@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -35,7 +36,10 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = Product::findOrFail($request->pid);
+        error_log($request->pid);
+
+
     }
 
     /**

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
+
 
 class ProductController extends Controller
 {
@@ -12,40 +14,20 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      * @param $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index($id)
     {
-        $name_types = DB::table('products')->select('type')->distinct('type')->get();
+        $products = DB::table('products')->select('type')->distinct('type')->get();
         $types = Product::get()->where('type',$id);
-
-
 
         return view('product.index',[
             'types' => $types,
-            'products' => $name_types
+            'products' => $products
         ]);
     }
 
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @param $id
-     * @return \Illuminate\Http\Response
-     */
-    public function selectType($id)
-    {
-        $products = Product::all();
-        $types = Product::get()->where('type','=',$id->type);
-
-        error_log($types);
-
-//        return view('product.index',[
-//            'types' => $types,
-//            'products' => $products
-//        ]);
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -73,11 +55,22 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
+        $item = Product::find($id);
+        $products = DB::table('products')->select('type')->distinct('type')->get();
+        $types = Product::get()->where('type',$id);
+
+        return view('product.show',[
+            'types' => $types,
+            'products' => $products,
+            'item' => $item
+        ]);
+
+
 
     }
 

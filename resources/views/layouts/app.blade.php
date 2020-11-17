@@ -34,6 +34,22 @@
         </main>
     </div>
     @yield('script')
+    <script>
+        $('#cart').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var title = button.data('name')
+            var id = button.data('pid')
+
+
+            $(this).find(".modal-title").text(title);
+            $(this).find(".modal-body #pid").val(id);
+
+            // $(this).find(".modal-body").text(id);
+            $(this).find(".modal-body #pid").val(id);
+
+
+        });
+    </script>
 
 </body>
 </html>

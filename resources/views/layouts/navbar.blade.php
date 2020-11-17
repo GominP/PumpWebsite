@@ -21,7 +21,7 @@
                 </li>
                 <li class="nav-item">
                     @if(\Illuminate\Support\Facades\Auth::check())
-                        <a href="{{ route('product.index',['type_id' => 1]) }}" class="nav-link">Product </a>
+                        <a href="{{ route('product.index',['type_id' => 'VARVEL']) }}" class="nav-link">Product </a>
                     @else
                         <a class="nav-link" href="{{ route('login') }}">Product</a>
                     @endif
@@ -49,7 +49,7 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item">
-                                Your order
+                                Your Cart
                             </a>
                             <a class="dropdown-item" style="color: red" href="{{ route('logout') }}"
                                onclick="event.preventDefault();

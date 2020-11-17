@@ -23,8 +23,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/service', 'HomeController@service')->name('service');
 Route::get('/about', 'HomeController@about')->name('about');
 
+
+//Products
 Route::get('/allProduct/{type_id}', 'Productcontroller@index')->name('product.index');
-//Route::get('/allProduct/{type_id}', 'Productcontroller@selectType')->name('product2.index');
+Route::get('/allProduct/{product_id}/show', 'Productcontroller@show')->name('product.show');
+
+//Orders
+Route::post('/addOrder', 'Ordercontroller@store')->name('order.store');
+
+
+
 
 
 
