@@ -48,7 +48,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item">
+                            <a href="{{ route('order.index',['user_id' => \Illuminate\Support\Facades\Auth::id() ]) }}" class="dropdown-item">
                                 Your Cart
                             </a>
                             <a class="dropdown-item" style="color: red" href="{{ route('logout') }}"

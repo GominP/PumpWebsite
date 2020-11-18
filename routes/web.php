@@ -30,6 +30,8 @@ Route::get('/allProduct/{product_id}/show', 'Productcontroller@show')->name('pro
 
 //Orders
 Route::post('/addOrder', 'OrderController@store')->name('order.store');
+Route::get('/Your_Order/{user_id}', 'OrderController@index')->name('order.index');
+
 
 
 
