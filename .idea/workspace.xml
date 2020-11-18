@@ -115,6 +115,7 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
       <path value="$PROJECT_DIR$/vendor/psr/container" />
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/vendor/yoeunes/toastr" />
     </include_path>
   </component>
   <component name="ProjectId" id="1kMbNW8NFrCOrN2Qe2hlOPRnc3n" />
@@ -150,7 +151,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605513368150</updated>
-      <workItem from="1605513369454" duration="47773000" />
+      <workItem from="1605513369454" duration="51084000" />
     </task>
     <servers />
   </component>

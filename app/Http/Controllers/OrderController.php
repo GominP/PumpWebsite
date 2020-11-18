@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\OrderList;
 use App\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,6 +45,24 @@ class OrderController extends Controller
 
         $item = Product::findOrFail($request->input('p_id'));
         $user = Auth::id();
+
+        $order = new Order();
+        $order->user_id = $user;
+        $order->product_id =$item->id;
+        $order->quantity= $request->input('amount');
+        $order->status = "อยู่ในตะกร้า";
+        $order->order_start_date = Carbon::today();
+        $order->order_end_date = Carbon::today()->addDay(3);
+
+        $order->save();
+
+
+        $order_list = new OrderList();
+        $order_list->user_id = $user;
+        $order_list->order_id = $order->id;
+        $order_list->save();
+
+
 //        dd($item->type);
 //        dd($request->input('amount'));
 
@@ -50,8 +70,7 @@ class OrderController extends Controller
 //        $item = Product::findOrFail($request->input('pid'));
 //        error_log($item);
 
-
-//        return redirect()->route('product.index',['type_id' => 'VARVEL']);
+        return redirect()->route('product.index',['type_id' => 'VARVEL'])->with('message','Successfully');
 
 
     }
