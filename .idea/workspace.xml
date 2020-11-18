@@ -150,7 +150,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605513368150</updated>
-      <workItem from="1605513369454" duration="40421000" />
+      <workItem from="1605513369454" duration="47773000" />
     </task>
     <servers />
   </component>
@@ -162,6 +162,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="515" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1605515411708" />
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605697056628">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1605697056628" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1605513654513">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

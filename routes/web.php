@@ -29,7 +29,7 @@ Route::get('/allProduct/{type_id}', 'Productcontroller@index')->name('product.in
 Route::get('/allProduct/{product_id}/show', 'Productcontroller@show')->name('product.show');
 
 //Orders
-Route::post('/addOrder', 'Ordercontroller@store')->name('order.store');
+Route::post('/addOrder', 'OrderController@store')->name('order.store');
 
 
 

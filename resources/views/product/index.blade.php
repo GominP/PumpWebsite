@@ -69,18 +69,20 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title"></h5>
+                        <h5 class="modal-title">
+                            <input type="text" id="i1" name="i1" hidden></input>
+                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input  id="pid" hidden>
+                        <input  id="p_id" name="p_id" hidden>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Amount</span>
                             </div>
-                            <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input type="number" name="amount"  id="amount" class="form-control" aria-label="Amount (to the nearest dollar)">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">unit</span>
                             </div>

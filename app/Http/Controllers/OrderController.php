@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -36,8 +37,21 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $item = Product::findOrFail($request->pid);
-        error_log($request->pid);
+        $validatedData = $request->validate([
+            'amount' => 'required|min:1'
+        ]);
+
+        $item = Product::findOrFail($request->input('p_id'));
+        $user = Auth::id();
+//        dd($item->type);
+//        dd($request->input('amount'));
+
+
+//        $item = Product::findOrFail($request->input('pid'));
+//        error_log($item);
+
+
+//        return redirect()->route('product.index',['type_id' => 'VARVEL']);
 
 
     }
