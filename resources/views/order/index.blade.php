@@ -28,7 +28,7 @@
                 <div class="card-body table-responsive ">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="cart" role="tabpanel" aria-labelledby="report-tab">
-                            <table class="table table-hover text-center">
+                            <table class="table table-hover text-center" name="tableCart">
                                 <thead>
                                     <tr>
                                         <th scope="col">Product Name</th>
@@ -45,7 +45,7 @@
                                                 <form action="{{ route('order.destroy', ['order' => $order->id]) }}" method="post">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <button class="btn btn-outline-danger btn-lg" type="submit">Delete</button>
+                                                    <button name="deleteBtn" class="btn btn-outline-danger btn-lg" type="submit">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -55,20 +55,17 @@
                                         <form action="{{ route('order.cart.update') }}" method="post">
                                             @method('PUT')
                                             @csrf
-                                            <button type="submit" class="btn btn-outline-success float-right">Order all</button>
+                                            <button type="submit"  name="orderBtn" class="btn btn-outline-success float-right">Order all</button>
                                         </form>
                                     </tfoot>
                                 </table>
                         </div>
                         <div class="tab-pane fade show " id="wait" role="tabpanel" aria-labelledby="report-tab">
-                            <table class="table table-hover text-center">
+                            <table class="table table-hover text-center" name="tableWait">
                                 <thead>
                                 <tr>
                                     <th scope="col">Product Name</th>
                                     <th scope="col">Amount</th>
-
-
-
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -83,12 +80,11 @@
                             </table>
                         </div>
                         <div class="tab-pane fade show " id="delivery" role="tabpanel" aria-labelledby="report-tab">
-                            <table class="table table-hover text-center">
+                            <table class="table table-hover text-center" name="tableDelivery">
                                 <thead>
                                 <tr>
                                     <th scope="col">Product Name</th>
                                     <th scope="col">Amount</th>
-
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -103,13 +99,11 @@
                             </table>
                         </div>
                         <div class="tab-pane fade show " id="success" role="tabpanel" aria-labelledby="report-tab">
-                            <table class="table table-hover text-center">
+                            <table class="table table-hover text-center" name="table" name="tableSuccess">
                                 <thead>
                                 <tr>
                                     <th scope="col">Product Name</th>
                                     <th scope="col">Amount</th>
-
-
 
                                 </tr>
                                 </thead>
