@@ -61,40 +61,50 @@
                                 </table>
                         </div>
                         <div class="tab-pane fade show " id="wait" role="tabpanel" aria-labelledby="report-tab">
-                            <table class="table table-hover text-center" name="tableWait">
+
+                            <table class="table table-hover text-center" name="tableDelivery">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Amount</th>
+                                    <th scope="col">Product List ID</th>
+                                    <th scope="col">Detail</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($wait as $w)
+                                @foreach($ol as $o)
                                     <tr>
-                                        <td>{{$w->product->name}}</td>
-                                        <td>{{$w->quantity}}</td>
+                                        <td>{{$o->order_number}}</td>
+                                        <td>
+                                            <a href="{{ route('order.show',['order' => $o->order_number]) }}">
+                                                <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
-
                                 </tbody>
+
                             </table>
                         </div>
                         <div class="tab-pane fade show " id="delivery" role="tabpanel" aria-labelledby="report-tab">
                             <table class="table table-hover text-center" name="tableDelivery">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Amount</th>
+                                    <th scope="col">Product List ID</th>
+                                    <th scope="col">Detail</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($delivery as $deli)
                                     <tr>
-                                        <td>{{$deli->product->name}}</td>
-                                        <td>{{$deli->quantity}}</td>
+                                        <td>{{$deli->order_number}}</td>
+                                        <td>
+                                            <a href="{{ route('order.show',['order' => $deli->order_number]) }}">
+                                                <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
+
 
                             </table>
                         </div>
@@ -102,20 +112,24 @@
                             <table class="table table-hover text-center" name="table" name="tableSuccess">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Amount</th>
-
+                                    <th scope="col">Product List ID</th>
+                                    <th scope="col">Detail</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($success as $s)
                                     <tr>
-                                        <td>{{$s->product->name}}</td>
-                                        <td>{{$s->quantity}}</td>
+                                        <td>{{$s->order_number}}</td>
+                                        <td>
+                                            <a href="{{ route('order.show',['order' => $s->order_number]) }}">
+                                                <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
-
                                 </tbody>
+
+
                             </table>
                         </div>
             </div>

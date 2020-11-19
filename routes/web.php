@@ -31,10 +31,11 @@ Route::get('/allProduct/{type_id}', 'ProductController@index')->name('product.in
 Route::get('/allProduct/{product_id}/show', 'ProductController@show')->name('product.show');
 
 //Orders
-Route::post('/addOrder', 'OrderController@store')->name('order.store');
-Route::get('/Your_Order/{user_id}', 'OrderController@index')->name('order.index');
-Route::put('/order_cart','OrderController@order')->name('order.cart.update');
 Route::resource('/order','OrderController');
+Route::post('/addOrder', 'OrderController@store')->name('order.store');
+Route::get('/Your_Order', 'OrderController@index')->name('order.index');
+Route::get('/Show_Order/{order_number}', 'OrderController@showDetailOrder')->name('order.show.detail');
+Route::put('/order_cart','OrderController@order')->name('order.cart.update');
 
 
 

@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class OrderController extends Controller
@@ -18,16 +19,27 @@ class OrderController extends Controller
     {
         $user = Auth::id();
         $order = Order::all()->where('user_id','=',$user)->where('status','=','อยู่ในตะกร้า');
-        $wait= Order::all()->where('user_id','=',$user)->where('status','=','รอการยืนยัน');
-        $delivery = Order::all()->where('user_id','=',$user)->where('status','=','กำลังจัดส่ง');
-        $success = Order::all()->where('user_id','=',$user)->where('status','=','เรียบร้อย');
+//        $wait= Order::all()->where('user_id','=',$user)->where('status','=','รอการยืนยัน');
+//        $delivery = Order::all()->where('user_id','=',$user)->where('status','=','กำลังจัดส่ง');
+//        $success = Order::all()->where('user_id','=',$user)->where('status','=','เรียบร้อย');
+        $ol = DB::table('orders')->select('order_number')->distinct('order_number')
+                                ->where('user_id','=',$user)
+                                ->where('status','=','รอการยืนยัน')->get();
+
+        $delivery = DB::table('orders')->select('order_number')->distinct('order_number')
+            ->where('user_id','=',$user)
+            ->where('status','=','กำลังจัดส่ง')->get();
+
+        $success = DB::table('orders')->select('order_number')->distinct('order_number')
+            ->where('user_id','=',$user)
+            ->where('status','=','เรียบร้อย')->get();
 
 
         return view('order.index',[
         'order_lists' => $order,
             'delivery' => $delivery,
             'success' => $success,
-            'wait' => $wait
+            'ol'=> $ol
         ]);
     }
 
@@ -63,7 +75,6 @@ class OrderController extends Controller
         $order->status = "อยู่ในตะกร้า";
         $order->order_start_date = Carbon::today();
         $order->order_end_date = Carbon::today()->addDay(3);
-
         $order->save();
 
 
@@ -75,12 +86,17 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param   $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($order)
     {
-        //
+        $user = Auth::id();
+        $orders = Order::all()->where('order_number','=',$order)->where('user_id','=',$user);
+
+        return view('order.show',[
+            'orders' => $orders
+        ]);
     }
 
     /**
@@ -131,6 +147,12 @@ class OrderController extends Controller
             $o->status = 'รอการยืนยัน';
             $o->save();
         }
+
+//        $orderL = new OrderList();
+//        $orderL->user_id = $user;
+//        $orderL->order_number = $number;
+//        $orderL->save();
+
         return redirect()->route('order.index')->with('message','Order Successfully');
     }
 
