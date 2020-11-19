@@ -24,7 +24,11 @@
                     @method('PUT')
                     @csrf
                     <div class="form-group">
-{{--                        <img class="card-img-top"  style="height: 40rem" src="{{asset('img/v1.jpg')}}" alt="Card image cap">--}}
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Example file input</label>
+                            <input type="file" class="form-control-file" name="file" id="exampleFormControlFile1">
+                        </div>
                         <label for="name">Name</label>
                         <input type="name" class="form-control" id="name" name="name"  value="{{ $item->name }}" placeholder="">
 
@@ -32,7 +36,13 @@
                         <input type="number" class="form-control" id="price" name="price" value="{{ $item->price }}" placeholder="">
 
                         <label for="type">Type</label>
-                        <input type="text" class="form-control" id="type" name="type" value="{{ $item->type }} " placeholder="">
+                        <select class="form-control" name="type">
+                            <option value="VARVEL">VARVEL</option>
+                            <option value="EXPLOSION PROOF MOTORS">EXPLOSION PROOF MOTORS</option>
+                            <option value="AC INDUCTION MOTORS">AC INDUCTION MOTORS</option>
+                            <option value="HELICAL GEAR">HELICAL GEAR</option>
+                            <option value="WORM GEAR SPEED REDUCER">WORM GEAR SPEED REDUCER</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="detail">Detail</label>

@@ -120,10 +120,20 @@ class ProductController extends Controller
     public function updateProduct(Request $request,$product)
     {
         $req =Product::find($product);
+
+        $img = $request->file('file');
+        $nameImg = time() . '-' . $request->input('name') . '.' . $img->getClientOriginalExtension();
+        $des = public_path('/img/products');
+        $img->move($des, $nameImg);
+
+
+
         $req->name = $request->input('name');
         $req->price = $request->input('price');
         $req->type = $request->input('type');
         $req->detail = $request->input('detail');
+        $req->img = '/img/products/' . $nameImg;
+
 
         $req->save();
 
@@ -150,9 +160,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $product)
     {
-        //
+
+
+
     }
 
     /**
@@ -166,22 +178,6 @@ class ProductController extends Controller
         //
     }
 
-    public function updateImg(Request $request, $id) {
-        if (!$request->file('img')) {
-            return redirect()->back()->with('alert', 'เกิดข้อผิดพลาด');
-        }
-
-        $user = User::findOrFail($id);
-
-        $img = $request->file('img');
-        $input = time() . '-' . $user->first_name . '.' . $img->getClientOriginalExtension();
-        $des = public_path('/images/profile');
-        $img->move($des, $input);
-        $user->img = '/images/profile/' . $input;
-
-        $user->save();
-        return redirect()->route('user.show', ['user' => $user->id])->with('alert', 'เปลี่ยนรูปประจำตัวเรียบร้อยแล้ว');
-    }
 
 
 }
