@@ -20,7 +20,6 @@ class CreateOrdersTable extends Migration
             $table->integer('quantity');
             $table->integer('order_number')->nullable();
             $table->enum('status',['อยู่ในตะกร้า','รอการยืนยัน','กำลังจัดส่ง','เรียบร้อย']);
-            $table->string('img')->nullable();
             $table->date('order_start_date');
             $table->date('order_end_date');
 

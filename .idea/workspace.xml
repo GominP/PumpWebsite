@@ -132,6 +132,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\Pump\public\img\products" />
       <recent name="C:\laragon\www\Pump\resources\views" />
       <recent name="C:\laragon\www\Pump\resources\views\layouts\product" />
       <recent name="C:\laragon\www\Pump\app\Http\Controllers\Auth" />
@@ -151,7 +152,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605513368150</updated>
-      <workItem from="1605513369454" duration="101275000" />
+      <workItem from="1605513369454" duration="103689000" />
     </task>
     <servers />
   </component>

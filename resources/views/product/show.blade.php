@@ -21,7 +21,7 @@
             </div>
             <div class="col-8">
                 <div class="card" >
-                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <img class="card-img-top"  src="{{asset( $item->img )}}" alt="Card image cap">
                     <div class="card-body">
                         <p>Name : {{ $item->name }}</p>
                         <p>Price : {{ $item->price }}</p>

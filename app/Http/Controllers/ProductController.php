@@ -52,25 +52,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $products = DB::table('products')->select('type')->distinct('type')->get();
 
-        $img = $request->file('img');
+        $img = $request->file('file');
         $nameImg = time() . '-' . $request->input('name') . '.' . $img->getClientOriginalExtension();
-        $des = public_path('/img/product');
+        $des = public_path('/img/products');
         $img->move($des, $nameImg);
-
-
 
         $req = new Product();
         $req->name = $request->input('name');
-        $req->detail = $request->input('name');
-        $req->type = $request->input('name');
-        $req->price = $request->input('name');
-        $req->img = '/images/profile/' . $nameImg;
+        $req->detail = $request->input('detail');
+        $req->type = $request->input('type');
+        $req->price = $request->input('price');
+        $req->img = '/img/products/' . $nameImg;
+        $req->save();
 
-
-
-
-
+        return redirect()->route('product.create')->with('message','Created Success');
     }
 
     /**

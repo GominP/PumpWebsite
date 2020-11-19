@@ -20,8 +20,7 @@
 
             </div>
             <div class="col-8">
-                <form action="{{ route('product.store') }}" method="post">
-                    @method('PUT')
+                <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <div class="form-group">

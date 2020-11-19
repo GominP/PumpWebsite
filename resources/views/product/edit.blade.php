@@ -20,7 +20,7 @@
 
             </div>
             <div class="col-8">
-                <form action="{{ route('product.show.update',['product_id'=> $item->id]) }}" method="post">
+                <form action="{{ route('product.show.update',['product_id'=> $item->id]) }}" method="post" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="form-group">

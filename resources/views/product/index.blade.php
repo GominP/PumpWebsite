@@ -26,7 +26,7 @@
                     <div class="card-columns">
                         @foreach($types as $type)
                         <div class="card border-primary mb-3 "  name="cardProduct" style="width: 18rem;">
-                            <img class="card-img-top" style="height: 13rem" src="{{asset('img/v1.jpg')}}"* alt="Card image cap">
+                            <img class="card-img-top" style="height: 13rem" src="{{asset( $type->img )}}" alt="Card image cap">
                             <div class="card-body text-xl-center">
                                 <h5 class="card-title ">{{ $type->name }}</h5>
                             </div>

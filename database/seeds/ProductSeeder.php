@@ -18,7 +18,8 @@ class ProductSeeder extends Seeder
                     'name' => Str::random(10),
                     'detail' => Str::random(10).'@gmail.com',
                     'type' => 'VARVEL',
-                    'price' => 4000
+                    'price' => 4000,
+                    'img' => '/img/products/v1.jpg'
             ]);
         }
 
@@ -26,8 +27,10 @@ class ProductSeeder extends Seeder
             DB::table('products')->insert([
                 'name' => Str::random(10),
                 'detail' => Str::random(10).'@gmail.com',
-                'type' => 'VARVEL',
-                'price' => 4000
+                'type' => 'AC INDUCTION MOTORS',
+                'price' => 4000,
+                'img' => '/img/products/v1.jpg'
+
             ]);
         }
 
@@ -36,7 +39,9 @@ class ProductSeeder extends Seeder
                 'name' => Str::random(10),
                 'detail' => Str::random(10).'@gmail.com',
                 'type' => 'EXPLOSION PROOF MOTORS',
-                'price' => 5000
+                'price' => 5000,
+                'img' => '/img/products/v1.jpg'
+
             ]);
         }
         for($i = 0 ; $i <= 5 ; $i++){
@@ -44,7 +49,10 @@ class ProductSeeder extends Seeder
                 'name' => Str::random(10),
                 'detail' => Str::random(10).'@gmail.com',
                 'type' => 'BLOWER AND TURBO BLOWER',
-                'price' => 5000
+                'price' => 5000,
+                'img' => '/img/products/v1.jpg'
+
+
             ]);
         }
 
