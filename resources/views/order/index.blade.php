@@ -12,16 +12,16 @@
                 </div>
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="true">Cart</a>
+                        <a class="nav-link active" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="true"> <i class="fas fa-shopping-cart"></i> Cart</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="success-tab" data-toggle="tab" href="#wait" role="tab" aria-controls="wait" aria-selected="false">Wait for Confirm</a>
+                        <a class="nav-link" id="success-tab" data-toggle="tab" href="#wait" role="tab" aria-controls="wait" aria-selected="false"><i class="fas fa-spinner"></i> Wait for Confirm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="delivery-tab" data-toggle="tab" href="#delivery" role="tab" aria-controls="delivery" aria-selected="false">In Delivery</a>
+                        <a class="nav-link" id="delivery-tab" data-toggle="tab" href="#delivery" role="tab" aria-controls="delivery" aria-selected="false"><i class="fas fa-truck"></i> In Delivery</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="success-tab" data-toggle="tab" href="#success" role="tab" aria-controls="success" aria-selected="false">Success</a>
+                        <a class="nav-link" id="success-tab" data-toggle="tab" href="#success" role="tab" aria-controls="success" aria-selected="false"><i class="fas fa-clipboard-check"></i> Success</a>
                     </li>
                 </ul>
             </div>
@@ -33,6 +33,7 @@
                                     <tr>
                                         <th scope="col">Product Name</th>
                                         <th scope="col">Amount</th>
+                                        <th scope="col">Price</th>
                                         <th scope="col">Delete</th>
                                     </tr>
                                 </thead>
@@ -41,11 +42,13 @@
                                         <tr>
                                             <td>{{$order->product->name}}</td>
                                             <td>{{$order->quantity}}</td>
+                                            <td>{{$order->product->price}}</td>
+
                                             <td>
                                                 <form action="{{ route('order.destroy', ['order' => $order->id]) }}" method="post">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <button name="deleteBtn" class="btn btn-outline-danger btn-lg" type="submit">Delete</button>
+                                                    <button name="deleteBtn" class="btn btn-outline-danger btn-lg" type="submit"><i class="fas fa-trash-alt"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -56,7 +59,7 @@
                                         <form action="{{ route('order.cart.update') }}" method="post">
                                             @method('PUT')
                                             @csrf
-                                            <button type="submit"  name="orderBtn" class="btn btn-outline-success float-right">Order all</button>
+                                            <button type="submit"  name="orderBtn" class="btn btn-outline-success float-right " > <i class="fas fa-plus fa-fw"></i>Order</button>
                                         </form>
                                     @endif
                                     </tfoot>

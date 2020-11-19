@@ -25,16 +25,16 @@
                 <div class="row ">
                     <div class="card-columns">
                         @foreach($types as $type)
-                        <div class="card border-primary mb-3"  name="cardProduct" style="width: 18rem;">
-                            <img class="card-img-top" style="height: 13rem" src={{asset('img/v1.jpg')}} alt="Card image cap">
-                            <div class="card-body">
+                        <div class="card border-primary mb-3 "  name="cardProduct" style="width: 18rem;">
+                            <img class="card-img-top" style="height: 13rem" src="{{asset('img/v1.jpg')}}"* alt="Card image cap">
+                            <div class="card-body text-xl-center">
                                 <h5 class="card-title ">{{ $type->name }}</h5>
                             </div>
                             <ul class="list-group list-group-flush">
 {{--                                <li class="list-group-item">Price : {{ $type->price }}--}}
 {{--                                </li>--}}
                             </ul>
-                            <div class="card-body">
+                            <div class="card-body text-xl-center">
                                 <a href="{{ route('product.show',['product_id' => $type->id]) }}">
                                     <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>
                                 </a>
@@ -44,12 +44,12 @@
                                             data-name="{{ $type->name }}"
                                             data-pid="{{ $type->id }}"
                                             data-toggle="modal" data-target="#cart">
-                                        Add to Cart
+                                        <i class="fas fa-cart-plus"></i>
                                     </button>
                                 </a>
                                 @else
                                     <a href="{{ route('product.show.edit',['product_id' => $type->id]) }}">
-                                        <button type="submit"  name="orderBtn" class="btn btn-outline-success float-right">Edit</button>
+                                        <button type="submit"  name="orderBtn" class="btn btn-outline-success"><i class="fas fa-edit"></i> Edit</button>
                                     </a>
 
                                 @endif

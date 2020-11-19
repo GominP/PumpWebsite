@@ -12,13 +12,13 @@
                 </div>
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="cart-tab" data-toggle="tab" href="#wait" role="tab" aria-controls="cart" aria-selected="true">Wait for Confirm</a>
+                        <a class="nav-link active" id="cart-tab" data-toggle="tab" href="#wait" role="tab" aria-controls="cart" aria-selected="true"><i class="fas fa-spinner"></i> Confirm Order</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="delivey-tab" data-toggle="tab" href="#delivery" role="tab" aria-controls="wait" aria-selected="false">In Delivery</a>
+                        <a class="nav-link" id="delivey-tab" data-toggle="tab" href="#delivery" role="tab" aria-controls="wait" aria-selected="false"><i class="fas fa-truck fa-fw"></i> Delivery</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="success-tab" data-toggle="tab" href="#success" role="tab" aria-controls="success" aria-selected="false">Success</a>
+                        <a class="nav-link" id="success-tab" data-toggle="tab" href="#success" role="tab" aria-controls="success" aria-selected="false"><i class="fas fa-clipboard-check"></i> Success</a>
                     </li>
                 </ul>
             </div>
@@ -49,14 +49,14 @@
                                         <form action="{{ route('order.delivery.update', ['order' => $i->order_number]) }}" method="post">
                                             @method('PUT')
                                             @csrf
-                                            <button name="deleteBtn" class="btn btn-outline-success btn-lg" type="submit">Confirm</button>
+                                            <button name="deleteBtn" class="btn btn-outline-success btn-lg" type="submit"><i class="fas fa-check-square"></i></button>
                                         </form>
                                     </td>
                                     <td>
                                         <form action="{{ route('order.delete.num', ['order' => $i->order_number]) }}" method="post">
                                             @method('DELETE')
                                             @csrf
-                                            <button name="deleteBtn" class="btn btn-outline-danger btn-lg" type="submit">Delete</button>
+                                            <button name="deleteBtn" class="btn btn-outline-danger btn-lg" type="submit"><i class="fas fa-trash-alt"></i></button>
                                         </form>
                                     </td>
                                 </tr>

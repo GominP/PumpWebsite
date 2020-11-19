@@ -93,9 +93,14 @@ class OrderController extends Controller
     {
         $user = Auth::id();
         $orders = Order::all()->where('order_number','=',$order);
+        $total = 0 ;
+        foreach ($orders as $order){
+            $total += $order->product->price;
+        }
 
         return view('order.show',[
-            'orders' => $orders
+            'orders' => $orders,
+            'total' => $total
         ]);
     }
 

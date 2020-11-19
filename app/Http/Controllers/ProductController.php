@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
@@ -38,7 +39,9 @@ class ProductController extends Controller
 
     public function create()
     {
-        //
+        $products = DB::table('products')->select('type')->distinct('type')->get();
+        return view('product.create',[
+            'products' => $products]);
     }
 
     /**
@@ -49,7 +52,25 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $img = $request->file('img');
+        $nameImg = time() . '-' . $request->input('name') . '.' . $img->getClientOriginalExtension();
+        $des = public_path('/img/product');
+        $img->move($des, $nameImg);
+
+
+
+        $req = new Product();
+        $req->name = $request->input('name');
+        $req->detail = $request->input('name');
+        $req->type = $request->input('name');
+        $req->price = $request->input('name');
+        $req->img = '/images/profile/' . $nameImg;
+
+
+
+
+
     }
 
     /**
@@ -147,4 +168,23 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function updateImg(Request $request, $id) {
+        if (!$request->file('img')) {
+            return redirect()->back()->with('alert', 'เกิดข้อผิดพลาด');
+        }
+
+        $user = User::findOrFail($id);
+
+        $img = $request->file('img');
+        $input = time() . '-' . $user->first_name . '.' . $img->getClientOriginalExtension();
+        $des = public_path('/images/profile');
+        $img->move($des, $input);
+        $user->img = '/images/profile/' . $input;
+
+        $user->save();
+        return redirect()->route('user.show', ['user' => $user->id])->with('alert', 'เปลี่ยนรูปประจำตัวเรียบร้อยแล้ว');
+    }
+
+
 }

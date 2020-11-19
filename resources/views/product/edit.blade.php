@@ -28,7 +28,7 @@
                         <label for="name">Name</label>
                         <input type="name" class="form-control" id="name" name="name"  value="{{ $item->name }}" placeholder="">
 
-                        <label for="price">Price</label>
+                        <label for="price " class="justify-content-center">Price</label>
                         <input type="number" class="form-control" id="price" name="price" value="{{ $item->price }}" placeholder="">
 
                         <label for="type">Type</label>
@@ -38,7 +38,7 @@
                         <label for="detail">Detail</label>
                         <textarea class="form-control" id="detail" rows="3" name="detail" >{{ $item->detail }}</textarea>
                     </div>
-                    <button type="submit"  name="orderBtn" class="btn btn-outline-success float-right">Edit</button>
+                    <button type="submit"  name="orderBtn" class="btn btn-outline-success float-right"><i class="fas fa-edit"></i>Edit</button>
 
                 </form>
 

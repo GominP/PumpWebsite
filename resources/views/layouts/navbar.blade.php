@@ -33,6 +33,9 @@
                         <li>
                             <a href="{{ route('order.edit') }}" class="nav-link">Edit Order </a>
                         </li>
+                        <li>
+                            <a href="{{ route('product.create') }}" class="nav-link">Add Product </a>
+                        </li>
                     @endif
                 @endguest
 
@@ -59,12 +62,14 @@
                                 @if(Auth::user()->role === 'user')
 
                                     <a href="{{ route('order.index',['user_id' => \Illuminate\Support\Facades\Auth::id() ]) }}" class="dropdown-item">
+                                        <i class="fas fa-shopping-cart"></i>
                                      Your Cart
                                     </a>
                                 @endif
                                 <a class="dropdown-item" style="color: red" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt"></i>
                                     {{ __('Logout') }}
                                 </a>
 
