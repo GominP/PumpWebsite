@@ -4,14 +4,14 @@
     <div class="container">
         <div class="row">
             <div class="col-4">
-                <div class="card " style="width: 18rem;">
+                <div class="card "  name="cardProductMenu"style="width: 18rem;">
                     <div class="card-header">
                         Products
                     </div>
                     <ul class="list-group list-group-flush">
                         @foreach($products as $product)
 
-                        <li class="list-group-item ">
+                        <li class="list-group-item " name="typeMenu">
                             <a href="{{ route('product.index',['type_id' => $product->type]) }}">{{ $product->type }}</a>
                         </li>
 
@@ -25,7 +25,7 @@
                 <div class="row ">
                     <div class="card-columns">
                         @foreach($types as $type)
-                        <div class="card border-primary mb-3" style="width: 18rem;">
+                        <div class="card border-primary mb-3"  name="cardProduct" style="width: 18rem;">
                             <img class="card-img-top" style="height: 13rem" src={{asset('img/v1.jpg')}} alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $type->name }}</h5>
@@ -36,10 +36,10 @@
                             </ul>
                             <div class="card-body">
                                 <a href="{{ route('product.show',['product_id' => $type->id]) }}">
-                                    <button type="button" class="btn btn-outline-primary">Show detail</button>
+                                    <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>
                                 </a>
                                 <a>
-                                    <button type="button" class="btn btn-outline-success"
+                                    <button  name="addBtn" type="button" class="btn btn-outline-success"
                                             data-name="{{ $type->name }}"
                                             data-pid="{{ $type->id }}"
                                             data-toggle="modal" data-target="#cart">
@@ -90,8 +90,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Confirm</button>
+                        <button name="closeBtn"type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button name="submitBtn"type="submit" class="btn btn-primary">Confirm</button>
                     </div>
                 </div>
             </div>

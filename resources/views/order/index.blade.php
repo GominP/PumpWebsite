@@ -15,6 +15,9 @@
                         <a class="nav-link active" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="true">Cart</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="success-tab" data-toggle="tab" href="#wait" role="tab" aria-controls="wait" aria-selected="false">Wait for Confirm</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="delivery-tab" data-toggle="tab" href="#delivery" role="tab" aria-controls="delivery" aria-selected="false">In Delivery</a>
                     </li>
                     <li class="nav-item">
@@ -56,6 +59,28 @@
                                         </form>
                                     </tfoot>
                                 </table>
+                        </div>
+                        <div class="tab-pane fade show " id="wait" role="tabpanel" aria-labelledby="report-tab">
+                            <table class="table table-hover text-center">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Amount</th>
+
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($wait as $w)
+                                    <tr>
+                                        <td>{{$w->product->name}}</td>
+                                        <td>{{$w->quantity}}</td>
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                            </table>
                         </div>
                         <div class="tab-pane fade show " id="delivery" role="tabpanel" aria-labelledby="report-tab">
                             <table class="table table-hover text-center">

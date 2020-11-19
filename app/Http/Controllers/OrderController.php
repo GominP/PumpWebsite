@@ -18,6 +18,7 @@ class OrderController extends Controller
     {
         $user = Auth::id();
         $order = Order::all()->where('user_id','=',$user)->where('status','=','อยู่ในตะกร้า');
+        $wait= Order::all()->where('user_id','=',$user)->where('status','=','รอการยืนยัน');
         $delivery = Order::all()->where('user_id','=',$user)->where('status','=','กำลังจัดส่ง');
         $success = Order::all()->where('user_id','=',$user)->where('status','=','เรียบร้อย');
 
@@ -26,6 +27,7 @@ class OrderController extends Controller
         'order_lists' => $order,
             'delivery' => $delivery,
             'success' => $success,
+            'wait' => $wait
         ]);
     }
 
@@ -64,11 +66,6 @@ class OrderController extends Controller
 
         $order->save();
 
-
-//        $order_list = new OrderList();
-//        $order_list->user_id = $user;
-//        $order_list->order_id = $order->id;
-//        $order_list->save();
 
         return redirect()->route('product.index',['type_id' => 'VARVEL'])->with('message','Successfully');
 
@@ -120,7 +117,7 @@ class OrderController extends Controller
         $req = Order::findOrFail($id);
         $req->delete();
         $user = Auth::id();
-        return redirect()->route('order.index',['user_id' => $user ]);
+        return redirect()->route('order.index');
 
     }
 
@@ -131,9 +128,10 @@ class OrderController extends Controller
         $number = rand(1000,9999);
         foreach ($order as $o){
             $o->order_number = $number;
+            $o->status = 'รอการยืนยัน';
             $o->save();
         }
-        redirect()->back();
+        return redirect()->route('order.index')->with('message','Order Successfully');
     }
 
 
