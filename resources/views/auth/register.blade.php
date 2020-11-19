@@ -73,7 +73,15 @@
                             <label f class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone_number" type="phone_number" class="form-control" name="phone_number" >
+                                <input id="phone_number" type="phone_number" class="form-control @error('phone_number') is-invalid @enderror"
+                                       name="phone_number"  required  autocomplete="phone_number">
+
+                                @error('phone_number')
+                                <span class="invalid-feedback" role="alert">
+                                        ตัวเลขไม่ครบ
+                                    </span>
+                                @enderror
+{{--                                <div class="alert-danger">เบอร์โทรผิด</div>--}}
                             </div>
                         </div>
 

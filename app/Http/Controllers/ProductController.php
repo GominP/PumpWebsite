@@ -85,6 +85,46 @@ class ProductController extends Controller
         //
     }
 
+
+    public function editProduct($product)
+    {
+        $products = DB::table('products')->select('type')->distinct('type')->get();
+        $item = Product::find($product);
+
+        return view('product.edit',[
+            'products' => $products,
+            'item' => $item
+
+        ]);
+
+    }
+
+    public function updateProduct(Request $request,$product)
+    {
+        $req =Product::find($product);
+        $req->name = $request->input('name');
+        $req->price = $request->input('price');
+        $req->type = $request->input('type');
+        $req->detail = $request->input('detail');
+
+        $req->save();
+
+        $products = DB::table('products')->select('type')->distinct('type')->get();
+        $types = Product::get()->where('type',$req->type);
+
+
+
+
+        return view('product.index',[
+            'products' => $products,
+            'item' => $req,
+            'types' => $types,
+        ])->with('message','Order Successfully');
+
+    }
+
+
+
     /**
      * Update the specified resource in storage.
      *

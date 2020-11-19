@@ -52,12 +52,15 @@
                                     @endforeach
                                     </tbody>
                                     <tfoot class="float-right">
+                                    @if($order_lists)
                                         <form action="{{ route('order.cart.update') }}" method="post">
                                             @method('PUT')
                                             @csrf
                                             <button type="submit"  name="orderBtn" class="btn btn-outline-success float-right">Order all</button>
                                         </form>
+                                    @endif
                                     </tfoot>
+
                                 </table>
                         </div>
                         <div class="tab-pane fade show " id="wait" role="tabpanel" aria-labelledby="report-tab">

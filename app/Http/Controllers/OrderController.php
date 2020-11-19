@@ -166,6 +166,9 @@ class OrderController extends Controller
         $delivery = DB::table('orders')->select('order_number')->distinct('order_number')
             ->where('status', '=', 'กำลังจัดส่ง')->get();
 
+        $success = DB::table('orders')->select('order_number')->distinct('order_number')
+            ->where('status', '=', 'เรียบร้อย')->get();
+
 //        $success = DB::table('orders')->select('order_number')->distinct('order_number')
 //            ->where('user_id','=',$user)
 //            ->where('status','=','เรียบร้อย')->get();
@@ -173,7 +176,8 @@ class OrderController extends Controller
 
         return view('order.edit', [
             'delivery' => $delivery,
-            'wait' => $wait
+            'wait' => $wait,
+            'success'=>$success
         ]);
     }
 

@@ -20,7 +20,18 @@
 
             </div>
             <div class="col-8">
-                {{ $item->name }}
+                <div class="card" >
+                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <div class="card-body">
+                        <p>Name : {{ $item->name }}</p>
+                        <p>Price : {{ $item->price }}</p>
+                        <p>Type : {{ $item->type }}</p>
+                        <p></p>
+                        <p class="card-text">Detail : {{ $item->detail }}</p>
+                    </div>
+                </div>
+
+
 
             </div>
         </div>

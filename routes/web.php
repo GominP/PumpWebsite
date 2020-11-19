@@ -26,9 +26,13 @@ Route::get('/about', 'HomeController@about')->name('about');
 
 //Products
 Route::resource('/resource','ProductController');
-
 Route::get('/allProduct/{type_id}', 'ProductController@index')->name('product.index');
 Route::get('/allProduct/{product_id}/show', 'ProductController@show')->name('product.show');
+Route::get('/allProduct/{product_id}/edit', 'ProductController@editProduct')->name('product.show.edit');
+Route::put('/allProduct/{product_id}/update', 'ProductController@updateProduct')->name('product.show.update');
+
+
+
 
 //Orders
 Route::resource('/order','OrderController');

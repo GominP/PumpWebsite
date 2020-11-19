@@ -15,7 +15,10 @@
                         <a class="nav-link active" id="cart-tab" data-toggle="tab" href="#wait" role="tab" aria-controls="cart" aria-selected="true">Wait for Confirm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="success-tab" data-toggle="tab" href="#delivery" role="tab" aria-controls="wait" aria-selected="false">In Delivery</a>
+                        <a class="nav-link" id="delivey-tab" data-toggle="tab" href="#delivery" role="tab" aria-controls="wait" aria-selected="false">In Delivery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="success-tab" data-toggle="tab" href="#success" role="tab" aria-controls="success" aria-selected="false">Success</a>
                     </li>
                 </ul>
             </div>
@@ -91,8 +94,32 @@
                                 </tr>
                             @endforeach
                             </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade show " id="success" role="tabpanel" aria-labelledby="report-tab">
+                        <table class="table table-hover text-center" name="table" name="tableSuccess">
+                            <thead>
+                            <tr>
+                                <th scope="col">Product List ID</th>
+                                <th scope="col">Detail</th>
 
 
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($success as $suc)
+                                <tr>
+                                    <td>{{$suc->order_number}}</td>
+                                    <td>
+                                        <a href="{{ route('order.show',['order' => $suc->order_number]) }}">
+                                            <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>
+                                        </a>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
