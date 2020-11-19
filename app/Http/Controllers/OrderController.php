@@ -92,7 +92,7 @@ class OrderController extends Controller
     public function show($order)
     {
         $user = Auth::id();
-        $orders = Order::all()->where('order_number','=',$order)->where('user_id','=',$user);
+        $orders = Order::all()->where('order_number','=',$order);
 
         return view('order.show',[
             'orders' => $orders
@@ -154,6 +154,57 @@ class OrderController extends Controller
 //        $orderL->save();
 
         return redirect()->route('order.index')->with('message','Order Successfully');
+    }
+
+    public function editOrder()
+    {
+        $user = Auth::id();
+
+        $wait = DB::table('orders')->select('order_number')->distinct('order_number')
+            ->where('status', '=', 'รอการยืนยัน')->get();
+
+        $delivery = DB::table('orders')->select('order_number')->distinct('order_number')
+            ->where('status', '=', 'กำลังจัดส่ง')->get();
+
+//        $success = DB::table('orders')->select('order_number')->distinct('order_number')
+//            ->where('user_id','=',$user)
+//            ->where('status','=','เรียบร้อย')->get();
+
+
+        return view('order.edit', [
+            'delivery' => $delivery,
+            'wait' => $wait
+        ]);
+    }
+
+    public function orderDelivery($order)
+    {
+        $orders = Order::all()->where('order_number','=',$order)->where('status','=','รอการยืนยัน');
+        foreach ($orders as $o){
+            $o->status = 'กำลังจัดส่ง';
+            $o->save();
+        }
+        return redirect()->route('order.edit')->with('message','Confirm Order');
+    }
+
+    public function orderConfirm($order)
+    {
+        $orders = Order::all()->where('order_number','=',$order)->where('status','=','กำลังจัดส่ง');
+        foreach ($orders as $o){
+            $o->status = 'เรียบร้อย';
+            $o->save();
+        }
+        return redirect()->route('order.edit')->with('message','Confirm Order');
+    }
+
+    public function deleteFormOrderID($order)
+    {
+        $orders = Order::all()->where('order_number','=',$order)->where('status','=','รอการยืนยัน');
+        foreach ($orders as $o){
+            $o->delete();
+        }
+        return redirect()->route('order.edit')->with('info','Successfully');
+
     }
 
 

@@ -12,6 +12,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
+
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a href="{{ url('/about') }}" class="nav-link">About Us </a>
@@ -25,9 +26,16 @@
                     @else
                         <a class="nav-link" href="{{ route('login') }}">Product</a>
                     @endif
-
-
                 </li>
+                @guest
+                @else
+                    @if(Auth::user()->role === 'admin')
+                        <li>
+                            <a href="{{ route('order.edit') }}" class="nav-link">Edit Order </a>
+                        </li>
+                    @endif
+                @endguest
+
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
@@ -47,23 +55,27 @@
                             {{ Auth::user()->name }}
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a href="{{ route('order.index',['user_id' => \Illuminate\Support\Facades\Auth::id() ]) }}" class="dropdown-item">
-                                Your Cart
-                            </a>
-                            <a class="dropdown-item" style="color: red" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                @if(Auth::user()->role === 'user')
+
+                                    <a href="{{ route('order.index',['user_id' => \Illuminate\Support\Facades\Auth::id() ]) }}" class="dropdown-item">
+                                     Your Cart
+                                    </a>
+                                @endif
+                                <a class="dropdown-item" style="color: red" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
 
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
 
-                    </li>
+                        </li>
+
 
 
                 @endguest
