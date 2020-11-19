@@ -14,20 +14,38 @@ class ProductSeeder extends Seeder
     public function run()
     {
         for($i = 0 ; $i <= 5 ; $i++){
-            for($j = 0 ; $j <= 5 ; $j++) {
-                DB::table('products')->insert([
+            DB::table('products')->insert([
                     'name' => Str::random(10),
                     'detail' => Str::random(10).'@gmail.com',
-                    'type' => Str::random(5),
+                    'type' => 'VARVEL',
                     'price' => 4000
-                ]);
+            ]);
+        }
 
-//                $p1 = new Product();
-//                $p1->name = 'name';
-//                $p1->detail = Str::random(10).'test';
-//                $p1->type = 'type';
-//                $p1->price = 4000;
-                }
+        for($i = 0 ; $i <= 5 ; $i++){
+            DB::table('products')->insert([
+                'name' => Str::random(10),
+                'detail' => Str::random(10).'@gmail.com',
+                'type' => 'VARVEL',
+                'price' => 4000
+            ]);
+        }
+
+        for($i = 0 ; $i <= 5 ; $i++){
+            DB::table('products')->insert([
+                'name' => Str::random(10),
+                'detail' => Str::random(10).'@gmail.com',
+                'type' => 'EXPLOSION PROOF MOTORS',
+                'price' => 5000
+            ]);
+        }
+        for($i = 0 ; $i <= 5 ; $i++){
+            DB::table('products')->insert([
+                'name' => Str::random(10),
+                'detail' => Str::random(10).'@gmail.com',
+                'type' => 'BLOWER AND TURBO BLOWER',
+                'price' => 5000
+            ]);
         }
 
     }

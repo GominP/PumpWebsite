@@ -7,22 +7,25 @@ use App\OrderList;
 use App\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function index($id)
+
+    public function index()
     {
         $user = Auth::id();
-        $ol = OrderList::all()->where('user_id','=',$user);
-//        dd($ol);
+        $order = Order::all()->where('user_id','=',$user)->where('status','=','อยู่ในตะกร้า');
+        $delivery = Order::all()->where('user_id','=',$user)->where('status','=','กำลังจัดส่ง');
+        $success = Order::all()->where('user_id','=',$user)->where('status','=','เรียบร้อย');
+
+
         return view('order.index',[
-        'orders' => $ol
+        'order_lists' => $order,
+            'delivery' => $delivery,
+            'success' => $success,
         ]);
     }
 
@@ -62,18 +65,10 @@ class OrderController extends Controller
         $order->save();
 
 
-        $order_list = new OrderList();
-        $order_list->user_id = $user;
-        $order_list->order_id = $order->id;
-        $order_list->save();
-
-
-//        dd($item->type);
-//        dd($request->input('amount'));
-
-
-//        $item = Product::findOrFail($request->input('pid'));
-//        error_log($item);
+//        $order_list = new OrderList();
+//        $order_list->user_id = $user;
+//        $order_list->order_id = $order->id;
+//        $order_list->save();
 
         return redirect()->route('product.index',['type_id' => 'VARVEL'])->with('message','Successfully');
 
@@ -109,7 +104,7 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, $order)
     {
         //
     }
@@ -117,11 +112,29 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Order  $order
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
-        //
+        $req = Order::findOrFail($id);
+        $req->delete();
+        $user = Auth::id();
+        return redirect()->route('order.index',['user_id' => $user ]);
+
     }
+
+    public function order()
+    {
+        $user = Auth::id();
+        $order = Order::all()->where('user_id','=',$user)->where('status','=','อยู่ในตะกร้า');
+        $number = rand(1000,9999);
+        foreach ($order as $o){
+            $o->order_number = $number;
+            $o->save();
+        }
+        redirect()->back();
+    }
+
+
 }

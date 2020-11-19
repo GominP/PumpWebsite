@@ -25,12 +25,18 @@ Route::get('/about', 'HomeController@about')->name('about');
 
 
 //Products
-Route::get('/allProduct/{type_id}', 'Productcontroller@index')->name('product.index');
-Route::get('/allProduct/{product_id}/show', 'Productcontroller@show')->name('product.show');
+Route::resource('/resource','ProductController');
+
+Route::get('/allProduct/{type_id}', 'ProductController@index')->name('product.index');
+Route::get('/allProduct/{product_id}/show', 'ProductController@show')->name('product.show');
 
 //Orders
 Route::post('/addOrder', 'OrderController@store')->name('order.store');
 Route::get('/Your_Order/{user_id}', 'OrderController@index')->name('order.index');
+Route::put('/order_cart','OrderController@order')->name('order.cart.update');
+Route::resource('/order','OrderController');
+
+
 
 
 

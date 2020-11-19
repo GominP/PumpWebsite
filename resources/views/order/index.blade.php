@@ -22,39 +22,85 @@
                     </li>
                 </ul>
             </div>
-            <div class="card-columns">
-                @foreach($orders as $order)
-                <div class="card-body  tab le-responsive ">
+                <div class="card-body table-responsive ">
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="cart" role="tabpanel" aria-labelledby="cart-tab">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="{{asset('img/v1.jpg')}}" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $order->order->product->name }}</h5>
-                                    <a href="#" class="btn btn-outline-danger">Delete</a>
-                                </div>
-                            </div>
-
+                        <div class="tab-pane fade show active" id="cart" role="tabpanel" aria-labelledby="report-tab">
+                            <table class="table table-hover text-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                    @foreach($order_lists as $order)
+                                        <tr>
+                                            <td>{{$order->product->name}}</td>
+                                            <td>{{$order->quantity}}</td>
+                                            <td>
+                                                <form action="{{ route('order.destroy', ['order' => $order->id]) }}" method="post">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button class="btn btn-outline-danger btn-lg" type="submit">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                    <tfoot class="float-right">
+                                        <form action="{{ route('order.cart.update') }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-outline-success float-right">Order all</button>
+                                        </form>
+                                    </tfoot>
+                                </table>
                         </div>
-                        <div class="tab-pane fade table-responsive" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
-                            <table class="table table-hover text-center"></table>
+                        <div class="tab-pane fade show " id="delivery" role="tabpanel" aria-labelledby="report-tab">
+                            <table class="table table-hover text-center">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Amount</th>
 
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($delivery as $deli)
+                                    <tr>
+                                        <td>{{$deli->product->name}}</td>
+                                        <td>{{$deli->quantity}}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+
+                            </table>
                         </div>
+                        <div class="tab-pane fade show " id="success" role="tabpanel" aria-labelledby="report-tab">
+                            <table class="table table-hover text-center">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Amount</th>
 
-                        <div class="tab-pane fade table-responsive" id="success" role="tabpanel" aria-labelledby="success-tab">
 
 
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($success as $s)
+                                    <tr>
+                                        <td>{{$s->product->name}}</td>
+                                        <td>{{$s->quantity}}</td>
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                </div>
-                @endforeach
             </div>
-
-
         </div>
-
-
-
     </div>
 
 @endsection
