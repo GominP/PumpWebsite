@@ -49,7 +49,11 @@
                         <textarea class="form-control" id="detail" rows="3" name="detail" >{{ $item->detail }}</textarea>
                     </div>
                     <button type="submit"  name="orderBtn" class="btn btn-outline-success float-right"><i class="fas fa-edit"></i>Edit</button>
-
+                </form>
+                <form action="{{ route('product.destroy', ['product' => $item->id]) }}" method="post">
+                    @method('DELETE')
+                    @csrf
+                    <button name="deleteBtn" class="btn btn-outline-danger btn-lg" type="submit"><i class="fas fa-trash-alt"></i></button>
                 </form>
 
             </div>

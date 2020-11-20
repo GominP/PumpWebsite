@@ -1,5 +1,5 @@
 
-<nav class="navbar sticky-top navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar sticky-top navbar-expand-md navbar-light bg-white shadow-sm" style="">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
 {{--            {{ config('app.name', 'CRM Motor ') }}--}}
@@ -53,6 +53,12 @@
                         </li>
                     @endif
                 @else
+
+                    <li class="nav-item" style="align-self: center">
+                        <a href="{{ route('order.index',['user_id' => \Illuminate\Support\Facades\Auth::id() ]) }}" >
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}

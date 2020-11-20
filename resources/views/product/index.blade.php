@@ -4,20 +4,29 @@
     <div class="container">
         <div class="row">
             <div class="col-4">
-                <div class="card "  name="cardProductMenu"style="width: 18rem;">
-                    <div class="card-header">
-                        Products
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        @foreach($products as $product)
 
-                        <li class="list-group-item " name="typeMenu">
-                            <a href="{{ route('product.index',['type_id' => $product->type]) }}">{{ $product->type }}</a>
-                        </li>
+                <div id="list-example" class="list-group">
+                    <a class="list-group-item list-group-item-action card-header active" >Products</a>
+                    @foreach($products as $product)
+                        <a class=" shadow-sm  list-group-item list-group-item-action" href="{{ route('product.index',['type_id' => $product->type]) }}">{{ $product->type }}</a>
 
-                        @endforeach
-                    </ul>
+                    @endforeach
+
                 </div>
+{{--                <div class="card "  name="cardProductMenu"style="width: 18rem;">--}}
+{{--                    <div class="card-header">--}}
+{{--                        Products--}}
+{{--                    </div>--}}
+{{--                    <ul class="list-group list-group-flush">--}}
+{{--                        @foreach($products as $product)--}}
+
+{{--                        <li class="list-group-item " name="typeMenu">--}}
+{{--                            <a href="{{ route('product.index',['type_id' => $product->type]) }}">{{ $product->type }}</a>--}}
+{{--                        </li>--}}
+
+{{--                        @endforeach--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
 
 
             </div>
@@ -25,7 +34,7 @@
                 <div class="row ">
                     <div class="card-columns">
                         @foreach($types as $type)
-                        <div class="card border-primary mb-3 "  name="cardProduct" style="width: 18rem;">
+                        <div class=" shadow card border-dark mb-3 "  name="cardProduct" style="width: 18rem;">
                             <img class="card-img-top" style="height: 13rem" src="{{asset( $type->img )}}" alt="Card image cap">
                             <div class="card-body text-xl-center">
                                 <h5 class="card-title ">{{ $type->name }}</h5>
@@ -74,10 +83,10 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">
-                            <input type="text" id="i1" name="i1" hidden></input>
+                            <input type="text" id="i1" name="i1" hidden>
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true"></span>
                         </button>
                     </div>
                     <div class="modal-body">

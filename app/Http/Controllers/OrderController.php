@@ -19,9 +19,6 @@ class OrderController extends Controller
     {
         $user = Auth::id();
         $order = Order::all()->where('user_id','=',$user)->where('status','=','อยู่ในตะกร้า');
-//        $wait= Order::all()->where('user_id','=',$user)->where('status','=','รอการยืนยัน');
-//        $delivery = Order::all()->where('user_id','=',$user)->where('status','=','กำลังจัดส่ง');
-//        $success = Order::all()->where('user_id','=',$user)->where('status','=','เรียบร้อย');
         $ol = DB::table('orders')->select('order_number')->distinct('order_number')
                                 ->where('user_id','=',$user)
                                 ->where('status','=','รอการยืนยัน')->get();

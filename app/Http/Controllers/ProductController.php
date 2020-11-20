@@ -173,9 +173,21 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($product)
     {
-        //
+
+        $req = Product::findOrFail($product);
+        $req->delete();
+
+        $products = DB::table('products')->select('type')->distinct('type')->get();
+        $types = Product::get()->where('type','VARVEL');
+
+
+        return view('product.index',[
+            'types' => $types,
+            'products' => $products
+
+        ])->with('error'.'Deleted');
     }
 
 
