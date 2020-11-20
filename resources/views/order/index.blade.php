@@ -42,7 +42,7 @@
                                         <tr>
                                             <td>{{$order->product->name}}</td>
                                             <td>{{$order->quantity}}</td>
-                                            <td>{{$order->product->price}}</td>
+                                            <td>{{$order->product->price}} Baht.</td>
 
                                             <td>
                                                 <form action="{{ route('order.destroy', ['order' => $order->id]) }}" method="post">

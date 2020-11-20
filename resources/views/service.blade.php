@@ -25,6 +25,7 @@
         <hr class="my-4">
         <div>
             <section>
+                <img class="d-block w-100" src="{{asset('/img/s1.jpg')}}" alt="First slide">
 
             </section>
         </div>

@@ -24,7 +24,7 @@
                     <img class="card-img-top" width="200" height="500" src="{{asset( $item->img )}}" alt="Card image cap">
                     <div class="card-body">
                         <p>Name : {{ $item->name }}</p>
-                        <p>Price : {{ $item->price }}</p>
+                        <p>Price : {{ $item->price }} Baht.</p>
                         <p>Type : {{ $item->type }}</p>
                         <p></p>
                         <p class="card-text">Detail : {{ $item->detail }}</p>

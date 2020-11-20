@@ -33,7 +33,7 @@
                         <input type="name" class="form-control" id="name" name="name"  value="{{ $item->name }}" placeholder="">
 
                         <label for="price " class="justify-content-center">Price</label>
-                        <input type="number" class="form-control" id="price" name="price" value="{{ $item->price }}" placeholder="">
+                        <input type="number" min="0" class="form-control" id="price" name="price" value="{{ $item->price }}" placeholder="">
 
                         <label for="type">Type</label>
                         <select class="form-control" name="type">

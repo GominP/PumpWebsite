@@ -78,7 +78,7 @@
 
                                 @error('phone_number')
                                 <span class="invalid-feedback" role="alert">
-                                        ตัวเลขไม่ครบ
+                                        <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
 {{--                                <div class="alert-danger">เบอร์โทรผิด</div>--}}

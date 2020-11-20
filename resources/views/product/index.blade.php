@@ -95,7 +95,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Amount</span>
                             </div>
-                            <input type="number" name="amount"  id="amount" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input type="number" min="0" name="amount"  id="amount" class="form-control" aria-label="Amount (to the nearest dollar)">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">unit</span>
                             </div>

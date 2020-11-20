@@ -25,13 +25,13 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Example file input</label>
-                            <input type="file" class="form-control-file" name="file" id="exampleFormControlFile1">
+                            <input type="file" class="form-control-file  btn-primary" name="file" id="exampleFormControlFile1">
                         </div>
                         <label for="name">Name</label>
                         <input type="name" class="form-control" id="name" name="name"   placeholder="">
 
                         <label for="price " class="justify-content-center">Price</label>
-                        <input type="number" class="form-control" id="price" name="price"  placeholder="">
+                        <input type="number" min="0" class="form-control" id="price" name="price"  placeholder="">
 
                         <label for="type">Type</label>
                         <select class="form-control" name="type">
