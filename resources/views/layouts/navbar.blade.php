@@ -22,7 +22,7 @@
                 </li>
                 <li class="nav-item">
                     @if(\Illuminate\Support\Facades\Auth::check())
-                        <a href="{{ route('product.index',['type_id' => 'VARVEL']) }}" class="nav-link">Product </a>
+                        <a href="{{ route('product.index') }}" class="nav-link">Product </a>
                     @else
                         <a class="nav-link" href="{{ route('login') }}">Product</a>
                     @endif

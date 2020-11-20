@@ -25,13 +25,34 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Example file input</label>
-                            <input type="file" class="form-control-file  btn-primary" name="file" id="exampleFormControlFile1">
+                            <input type="file" class="form-control-file  btn-primary " name="file" id="exampleFormControlFile1" required>
+                            @error('file')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                         </div>
-                        <label for="name">Name</label>
-                        <input type="name" class="form-control" id="name" name="name"   placeholder="">
+                        <div>
+                            <label for="name">Name</label>
+                            <input type="name" class="form-control @error('name') is-invalid @enderror" id="name" name="name"   placeholder="">
+                            @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div>
+                            <label for="price "  class="justify-content-center">Price</label>
+                            <input type="number" min="0" max="10000000" class="form-control @error('price') is-invalid @enderror" id="price" name="price"  placeholder="">
 
-                        <label for="price " class="justify-content-center">Price</label>
-                        <input type="number" min="0" class="form-control" id="price" name="price"  placeholder="">
+                            @error('price')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+
+                        </div>
+
 
                         <label for="type">Type</label>
                         <select class="form-control" name="type">
@@ -45,7 +66,13 @@
 
                     <div class="form-group">
                         <label for="detail">Detail</label>
-                        <textarea class="form-control" id="detail" rows="3" name="detail" ></textarea>
+                        <textarea class="form-control @error('detail') is-invalid @enderror" id="detail" rows="3" name="detail" required></textarea>
+
+                        @error('detail')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
                     </div>
                     <button type="submit"  name="orderBtn" class="btn btn-outline-success float-right"><i class="fas fa-edit"></i>Create</button>
 

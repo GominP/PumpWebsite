@@ -7,20 +7,16 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @param $id
-     * @return Response
-     */
-    public function index($id)
+
+    public function index()
     {
         $products = DB::table('products')->select('type')->distinct('type')->get();
-        $types = Product::get()->where('type',$id);
+        $types = Product::get()->where('type',"VARVEL");
 
         return view('product.index',[
             'types' => $types,
@@ -52,18 +48,34 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => array('required', 'regex:/^[_A-z]*((-|\s)*[_A-z])*$/'),
+            'price' => 'required','max:1000000',
+            'detail' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('product.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $products = DB::table('products')->select('type')->distinct('type')->get();
 
-        $img = $request->file('file');
-        $nameImg = time() . '-' . $request->input('name') . '.' . $img->getClientOriginalExtension();
-        $des = public_path('/img/products');
-        $img->move($des, $nameImg);
+
 
         $req = new Product();
         $req->name = $request->input('name');
         $req->detail = $request->input('detail');
         $req->type = $request->input('type');
         $req->price = $request->input('price');
+
+
+        $img = $request->file('file');
+        $nameImg = time() . '-' . $request->input('name') . '.' . $img->getClientOriginalExtension();
+        $des = public_path('/img/products');
+        $img->move($des, $nameImg);
+
         $req->img = '/img/products/' . $nameImg;
         $req->save();
 
@@ -119,12 +131,19 @@ class ProductController extends Controller
 
     public function updateProduct(Request $request,$product)
     {
-        $req =Product::find($product);
+        $validator = Validator::make($request->all(), [
+            'name' => array('required', 'regex:/^[_A-z]*((-|\s)*[_A-z])*$/'),
+            'price' => 'required','max:1000000',
+            'detail' => 'required'
+        ]);
 
-        $img = $request->file('file');
-        $nameImg = time() . '-' . $request->input('name') . '.' . $img->getClientOriginalExtension();
-        $des = public_path('/img/products');
-        $img->move($des, $nameImg);
+        if ($validator->fails()) {
+            return redirect()->route('product.index')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $req =Product::find($product);
 
 
 
@@ -132,22 +151,16 @@ class ProductController extends Controller
         $req->price = $request->input('price');
         $req->type = $request->input('type');
         $req->detail = $request->input('detail');
-        $req->img = '/img/products/' . $nameImg;
-
-
+        $img = $request->file('file');
+        if ($img != null){
+            $nameImg = time() . '-' . $request->input('name') . '.' . $img->getClientOriginalExtension();
+            $des = public_path('/img/products');
+            $img->move($des, $nameImg);
+            $req->img = '/img/products/' . $nameImg;
+        }
         $req->save();
 
-        $products = DB::table('products')->select('type')->distinct('type')->get();
-        $types = Product::get()->where('type',$req->type);
-
-
-
-
-        return view('product.index',[
-            'products' => $products,
-            'item' => $req,
-            'types' => $types,
-        ])->with('message','Order Successfully');
+        return redirect()->route('product.index')->with('message','Success');
 
     }
 

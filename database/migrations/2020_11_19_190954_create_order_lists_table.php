@@ -16,7 +16,7 @@ class CreateOrderListsTable extends Migration
         Schema::create('order_lists', function (Blueprint $table) {
             $table->id();
             $table->integer('order_number')->nullable();
-            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->foreignId('product_id')->nullable()->constrained('products');
             $table->foreignId('order_id')->nullable()->constrained('orders');
 
             $table->timestamps();

@@ -27,13 +27,34 @@
 
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Example file input</label>
-                            <input type="file" class="form-control-file" name="file" id="exampleFormControlFile1">
+                            <input type="file" class="form-control-file" name="file" id="exampleFormControlFile1" >
                         </div>
-                        <label for="name">Name</label>
-                        <input type="name" class="form-control" id="name" name="name"  value="{{ $item->name }}" placeholder="">
+                        <div>
+                            <label for="name">Name</label>
+                            <input type="name" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required value="{{ $item->name }}" placeholder="">
+                            @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div>
+                            <label for="price " class="justify-content-center">Price</label>
 
-                        <label for="price " class="justify-content-center">Price</label>
-                        <input type="number" min="0" class="form-control" id="price" name="price" value="{{ $item->price }}" placeholder="">
+                            <input type="number" min="0" max="10000000" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ $item->price }}" placeholder="" required>
+                            @error('price')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            {{--                            <label for="price " class="justify-content-center">Price</label>--}}
+{{--                            <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ $item->price }} "  placeholder="">--}}
+{{--                            @error('price')--}}
+{{--                            <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                            @enderror--}}
+                        </div>
 
                         <label for="type">Type</label>
                         <select class="form-control" name="type">
@@ -46,7 +67,12 @@
                     </div>
                     <div class="form-group">
                         <label for="detail">Detail</label>
-                        <textarea class="form-control" id="detail" rows="3" name="detail" >{{ $item->detail }}</textarea>
+                        <textarea class="form-control @error('detail') is-invalid @enderror" id="detail" rows="3" name="detail" required>{{ $item->detail }}</textarea>
+                        @error('detail')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
                     </div>
                     <button type="submit"  name="orderBtn" class="btn btn-outline-success float-right"><i class="fas fa-edit"></i>Edit</button>
                 </form>
