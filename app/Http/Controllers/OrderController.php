@@ -92,7 +92,8 @@ class OrderController extends Controller
         $orders = Order::all()->where('order_number','=',$order);
         $total = 0 ;
         foreach ($orders as $order){
-            $total += $order->product->price;
+            $temp = $order->product->price * $order->quantity;
+            $total += $temp;
         }
 
         return view('order.show',[

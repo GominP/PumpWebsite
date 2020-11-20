@@ -96,6 +96,7 @@
                                 <tr>
                                     <th scope="col">Product List ID</th>
                                     <th scope="col">Detail</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
