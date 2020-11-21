@@ -102,6 +102,16 @@
                             <tr>
                                 <th scope="col">Order Number</th>
                                 <th scope="col">Detail</th>
+                                <th>
+                                    <form  class="float-right" action="{{ route('order.search') }}" method="post">
+                                        @method('PUT')
+                                        @csrf
+                                        <label for="date">Date</label>
+                                        <input data-provide="datepicker" id="date" type="text" name="date">
+                                        <button type="submit"  for="date" name="orderBtn" class="btn btn-primary float-right  " >Search</button>
+                                    </form>
+
+                                </th>
 
 
                             </tr>

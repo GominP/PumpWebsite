@@ -54,6 +54,7 @@
                                                         <td>{{$order->product->name}}</td>
                                                         <td>{{$order->quantity}}</td>
                                                         <td>{{number_format($order->product->price)}} Baht.</td>
+
                                                         <td>
                                                             <form action="{{ route('order.destroy', ['order' => $order->id]) }}" method="post">
                                                                 @method('DELETE')
@@ -76,20 +77,15 @@
                                                     <th colspan="8"></th>
                                                     <th class="text-right">{{number_format($amoutPrice)}}</th>
                                                 </tr>
-                                                <tr cl>
+                                                <tr >
                                                     <th>vat 7%</th>
                                                     <th colspan="8"></th>
                                                     <th class="text-right">{{number_format($amoutPrice*0.07)}}</th>
                                                 </tr>
-                                                <tr cl>
-                                                    <th>delivery</th>
+                                                <tr>
+                                                    <th>Total(+vat)</th>
                                                     <th colspan="8"></th>
-                                                    <th class="text-right">{{number_format(80)}}</th>
-                                                </tr>
-                                                <tr cl>
-                                                    <th>total</th>
-                                                    <th colspan="8"></th>
-                                                    <th class="text-right">{{number_format($amoutPrice*0.07+$amoutPrice+80)}} Baht</th>
+                                                    <th class="text-right">{{number_format($amoutPrice*0.07+$amoutPrice)}} Baht</th>
                                                 </tr>
                                                 </tbody>
 
@@ -168,30 +164,30 @@
 
                             </table>
                         </div>
-{{--                        <div class="tab-pane fade show " id="success" role="tabpanel" aria-labelledby="report-tab">--}}
-{{--                            <table class="table table-hover text-center" name="table" name="tableSuccess">--}}
-{{--                                <thead>--}}
-{{--                                <tr>--}}
-{{--                                    <th scope="col">Product List ID</th>--}}
-{{--                                    <th scope="col">Detail</th>--}}
-{{--                                </tr>--}}
-{{--                                </thead>--}}
-{{--                                <tbody>--}}
-{{--                                @foreach($success as $s)--}}
-{{--                                    <tr>--}}
-{{--                                        <td>{{$s->order_number}}</td>--}}
-{{--                                        <td>--}}
-{{--                                            <a href="{{ route('order.show',['order' => $s->order_number]) }}">--}}
-{{--                                                <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>--}}
-{{--                                            </a>--}}
-{{--                                        </td>--}}
-{{--                                    </tr>--}}
-{{--                                @endforeach--}}
-{{--                                </tbody>--}}
+                        <div class="tab-pane fade show " id="success" role="tabpanel" aria-labelledby="report-tab">
+                            <table class="table table-hover text-center" name="table" name="tableSuccess">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Product List ID</th>
+                                    <th scope="col">Detail</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($success as $s)
+                                    <tr>
+                                        <td>{{$s->order_number}}</td>
+                                        <td>
+                                            <a href="{{ route('order.show',['order' => $s->id]) }}">
+                                                <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
 
 
-{{--                            </table>--}}
-{{--                        </div>--}}
+                            </table>
+                        </div>
             </div>
         </div>
     </div>

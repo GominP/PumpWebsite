@@ -202,7 +202,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/layouts/navbar.blade.php</url>
-          <line>74</line>
+          <line>75</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

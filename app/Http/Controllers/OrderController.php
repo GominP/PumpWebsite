@@ -115,12 +115,11 @@ class OrderController extends Controller
             $total += $temp;
         }
 
-
-
         return view('order.show',[
             'orders' => $orders,
             'total' => $total,
-            'user'=> $user
+            'user'=> $user,
+            'o'=> $find
         ]);
     }
 
@@ -169,6 +168,7 @@ class OrderController extends Controller
         $number = rand(000000,999999);
         $order->order_number = $number;
         $order->status = 'รอการยืนยัน';
+        $order->order_start_date = Carbon::today();
         $order->save();
 
         return redirect()->route('order.index')->with('message','Order Successfully');
@@ -177,9 +177,10 @@ class OrderController extends Controller
     public function editOrder()
     {
         $user = Auth::id();
+
         $waits = Order::all()->where('status','=','รอการยืนยัน');
         $delivery = Order::all()->where('status','=','กำลังจัดส่ง');
-        $success = Order::all()->where('status','=','เรียบร้อย');
+        $success = Order::all()->where('status','=','เรียบร้อย')->sortByDesc('order_start_date');
 
 
         return view('order.edit', [
@@ -191,6 +192,7 @@ class OrderController extends Controller
 
     public function orderDelivery($order)
     {
+        $date = Carbon::parse(Carbon::today())->format('Y-m-d');
         $find_update_delivery = Order::find($order);
         $find_update_delivery->status = 'กำลังจัดส่ง';
         $find_update_delivery->save();
@@ -200,6 +202,7 @@ class OrderController extends Controller
 
     public function orderConfirm($order)
     {
+        $date = Carbon::parse(Carbon::today())->format('Y-m-d');
         $find_update_success = Order::find($order);
         $find_update_success->status = 'เรียบร้อย';
         $find_update_success->save();
@@ -216,7 +219,16 @@ class OrderController extends Controller
 //        dd($order);
         $find_delete = Order::find($order);
         $find_delete->delete();
+        $date = Carbon::parse(Carbon::today())->format('Y-m-d');
         return redirect()->route('order.edit')->with('info','Successfully');
+
+    }
+
+    public function searchDate(Request $request)
+    {
+
+        $req = Carbon::parse($request->input('date'))->format('Y-m-d');
+
 
     }
 

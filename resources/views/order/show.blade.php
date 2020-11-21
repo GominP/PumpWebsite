@@ -6,7 +6,7 @@
             <div class="card-header" id="headingOne">
                 <h5 class="mb-0">
                     @if(Auth::user()->role === 'admin')
-                    <a href="{{ route('order.edit') }}">
+                    <a href="{{ route('order.edit',['date'=> \Carbon\Carbon::today()]) }}">
                         <button type="button" class="btn btn-info"> <i class="fas fa-arrow-left"></i> </button>
                     </a>
                     @else
@@ -49,6 +49,9 @@
                                     </table>
                                 </div>
                                 <div class="col-4">
+                                    <a class="text-right">
+                                        <p>Created Date </p> <p><em>{{$o->order_start_date}}</em></p>
+                                    </a>
                                     <h3>Contact</h3>
                                     <table class="table table-sm">
                                         <tbody>
@@ -68,6 +71,7 @@
                                         </tr>
                                         </tbody>
                                     </table>
+
                                     <h3>Receipt</h3>
                                     <table class="table table-sm">
                                         <tbody>
@@ -81,19 +85,15 @@
                                             <td colspan="2"></td>
                                             <td class="text-right">{{number_format($total*0.07)}}</td>
                                         </tr>
-                                        <tr>
-                                            <td>delivery</td>
-                                            <td colspan="2"></td>
-                                            <td class="text-right">{{number_format(80)}}</td>
-                                        </tr>
                                         <tr >
-                                            <td>total</td>
+                                            <td>Total(+vat)</td>
                                             <td colspan="2"></td>
-                                            <td class="text-right">{{number_format($total*0.07+$total+80)}} Baht</td>
+                                            <td class="text-right">{{number_format($total*0.07+$total)}} Baht</td>
                                         </tr>
                                         </tbody>
 
                                     </table>
+
 
                                 </div>
                             </div>

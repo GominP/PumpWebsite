@@ -30,6 +30,8 @@ Route::post('/addOrder', 'OrderController@store')->name('order.store');
 Route::get('/Your_Order', 'OrderController@index')->name('order.index');
 Route::get('/edit', 'OrderController@editOrder')->name('order.edit');
 Route::get('/Show_Order/{order_number}', 'OrderController@showDetailOrder')->name('order.show.detail');
+Route::put('/order_Search','OrderController@searchDate')->name('order.search');
+
 Route::put('/order_cart','OrderController@order')->name('order.cart.update');
 Route::put('/order_confirm{order}','OrderController@orderConfirm')->name('order.confirm.update');
 Route::put('/order_delivery{order}','OrderController@orderDelivery')->name('order.delivery.update');
