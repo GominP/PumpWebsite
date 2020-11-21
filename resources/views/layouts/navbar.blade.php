@@ -53,12 +53,14 @@
                         </li>
                     @endif
                 @else
-
+                    @if(Auth::user()->role === 'user')
                     <li class="nav-item" style="align-self: center">
                         <a href="{{ route('order.index',['user_id' => \Illuminate\Support\Facades\Auth::id() ]) }}" >
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                     </li>
+
+                    @endif
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
@@ -66,7 +68,6 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 @if(Auth::user()->role === 'user')
-
                                     <a href="{{ route('order.index',['user_id' => \Illuminate\Support\Facades\Auth::id() ]) }}" class="dropdown-item">
                                         <i class="fas fa-shopping-cart"></i>
                                      Your Cart

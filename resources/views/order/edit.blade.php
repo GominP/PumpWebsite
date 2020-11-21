@@ -28,7 +28,7 @@
                         <table class="table table-hover text-center" name="tableCart">
                             <thead>
                             <tr>
-                                <th scope="col">Product List ID</th>
+                                <th scope="col">Order Number</th>
                                 <th scope="col">Detail</th>
                                 <th scope="col">Confirm</th>
                                 <th scope="col">Delete</th>
@@ -37,23 +37,23 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($wait as $i)
+                            @foreach($waits as $wait)
                                 <tr>
-                                    <td>{{$i->order_number}}</td>
+                                    <td>{{$wait->order_number}}</td>
                                     <td>
-                                        <a href="{{ route('order.show',['order' => $i->order_number]) }}">
+                                        <a href="{{ route('order.show',['order' => $wait->id]) }}">
                                             <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>
                                         </a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('order.delivery.update', ['order' => $i->order_number]) }}" method="post">
+                                        <form action="{{ route('order.delivery.update', ['order' => $wait->id]) }}" method="post">
                                             @method('PUT')
                                             @csrf
                                             <button name="deleteBtn" class="btn btn-outline-success btn-lg" type="submit"><i class="fas fa-check-square"></i></button>
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="{{ route('order.delete.num', ['order' => $i->order_number]) }}" method="post">
+                                        <form action="{{ route('order.delete.num', ['order' => $wait->id]) }}" method="post">
                                             @method('DELETE')
                                             @csrf
                                             <button name="deleteBtn" class="btn btn-outline-danger btn-lg" type="submit"><i class="fas fa-trash-alt"></i></button>
@@ -69,7 +69,7 @@
                         <table class="table table-hover text-center" name="table" name="tableSuccess">
                             <thead>
                             <tr>
-                                <th scope="col">Product List ID</th>
+                                <th scope="col">Order Number</th>
                                 <th scope="col">Detail</th>
                                 <th scope="col">Confirm</th>
 
@@ -80,12 +80,12 @@
                                 <tr>
                                     <td>{{$deli->order_number}}</td>
                                     <td>
-                                        <a href="{{ route('order.show',['order' => $deli->order_number]) }}">
+                                        <a href="{{ route('order.show',['order' => $deli->id]) }}">
                                             <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>
                                         </a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('order.confirm.update', ['order' => $deli->order_number]) }}" method="post">
+                                        <form action="{{ route('order.confirm.update', ['order' => $deli->id]) }}" method="post">
                                             @method('PUT')
                                             @csrf
                                             <button name="deleteBtn" class="btn btn-outline-success btn-lg" type="submit">Confirm</button>
@@ -100,7 +100,7 @@
                         <table class="table table-hover text-center" name="table" name="tableSuccess">
                             <thead>
                             <tr>
-                                <th scope="col">Product List ID</th>
+                                <th scope="col">Order Number</th>
                                 <th scope="col">Detail</th>
 
 
@@ -111,7 +111,7 @@
                                 <tr>
                                     <td>{{$suc->order_number}}</td>
                                     <td>
-                                        <a href="{{ route('order.show',['order' => $suc->order_number]) }}">
+                                        <a href="{{ route('order.show',['order' => $suc->id]) }}">
                                             <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>
                                         </a>
                                     </td>

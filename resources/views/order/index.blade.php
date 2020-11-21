@@ -115,14 +115,13 @@
                         </div>
 
                         <div class="tab-pane fade show " id="wait" role="tabpanel" aria-labelledby="report-tab">
-
                             <table class="table table-hover text-center" name="tableDelivery">
                                 @if($waits === null)
                                     No data
                                 @else
                                     <thead>
                                     <tr>
-                                        <th scope="col">Order List ID</th>
+                                        <th scope="col">Order Number </th>
                                         <th scope="col">Detail</th>
                                     </tr>
                                     </thead>
@@ -144,31 +143,31 @@
                                 @endif
                             </table>
                         </div>
-{{--                        <div class="tab-pane fade show " id="delivery" role="tabpanel" aria-labelledby="report-tab">--}}
-{{--                            <table class="table table-hover text-center" name="tableDelivery">--}}
-{{--                                <thead>--}}
-{{--                                <tr>--}}
-{{--                                    <th scope="col">Product List ID</th>--}}
-{{--                                    <th scope="col">Detail</th>--}}
+                        <div class="tab-pane fade show " id="delivery" role="tabpanel" >
+                            <table class="table table-hover text-center" name="tableDelivery">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Order Number </th>
+                                    <th scope="col">Detail</th>
 
-{{--                                </tr>--}}
-{{--                                </thead>--}}
-{{--                                <tbody>--}}
-{{--                                @foreach($delivery as $deli)--}}
-{{--                                    <tr>--}}
-{{--                                        <td>{{$deli->order_number}}</td>--}}
-{{--                                        <td>--}}
-{{--                                            <a href="{{ route('order.show',['order' => $deli->order_number]) }}">--}}
-{{--                                                <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>--}}
-{{--                                            </a>--}}
-{{--                                        </td>--}}
-{{--                                    </tr>--}}
-{{--                                @endforeach--}}
-{{--                                </tbody>--}}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($delivery as $deli)
+                                    <tr>
+                                        <td>{{$deli->order_number}}</td>
+                                        <td>
+                                            <a href="{{ route('order.show',['order' => $deli->id]) }}">
+                                                <button name="showDetailBtn" type="button" class="btn btn-outline-primary">Show detail</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
 
 
-{{--                            </table>--}}
-{{--                        </div>--}}
+                            </table>
+                        </div>
 {{--                        <div class="tab-pane fade show " id="success" role="tabpanel" aria-labelledby="report-tab">--}}
 {{--                            <table class="table table-hover text-center" name="table" name="tableSuccess">--}}
 {{--                                <thead>--}}

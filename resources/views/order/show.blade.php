@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-header" id="headingOne">
                 <h5 class="mb-0">
-                    @if(auth()->user() === 'user')
+                    @if(Auth::user()->role === 'admin')
                     <a href="{{ route('order.edit') }}">
                         <button type="button" class="btn btn-info"> <i class="fas fa-arrow-left"></i> </button>
                     </a>

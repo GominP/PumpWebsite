@@ -167,15 +167,9 @@ class OrderController extends Controller
         $order = Order::all()->where('user_id','=',$user)->where('status','=','ตะกร้า')->first();
         $order_lists = OrderList::all()->where('order_id','=',$order->id);
         $number = rand(000000,999999);
-
         $order->order_number = $number;
         $order->status = 'รอการยืนยัน';
         $order->save();
-
-//        $orderL = new OrderList();
-//        $orderL->user_id = $user;
-//        $orderL->order_number = $number;
-//        $orderL->save();
 
         return redirect()->route('order.index')->with('message','Order Successfully');
     }
@@ -183,54 +177,45 @@ class OrderController extends Controller
     public function editOrder()
     {
         $user = Auth::id();
-
-        $wait = DB::table('orders')->select('order_number')->distinct('order_number')
-            ->where('status', '=', 'รอการยืนยัน')->get();
-
-        $delivery = DB::table('orders')->select('order_number')->distinct('order_number')
-            ->where('status', '=', 'กำลังจัดส่ง')->get();
-
-        $success = DB::table('orders')->select('order_number')->distinct('order_number')
-            ->where('status', '=', 'เรียบร้อย')->get();
-
-//        $success = DB::table('orders')->select('order_number')->distinct('order_number')
-//            ->where('user_id','=',$user)
-//            ->where('status','=','เรียบร้อย')->get();
+        $waits = Order::all()->where('status','=','รอการยืนยัน');
+        $delivery = Order::all()->where('status','=','กำลังจัดส่ง');
+        $success = Order::all()->where('status','=','เรียบร้อย');
 
 
         return view('order.edit', [
             'delivery' => $delivery,
-            'wait' => $wait,
+            'waits' => $waits,
             'success'=>$success
         ]);
     }
 
     public function orderDelivery($order)
     {
-        $orders = Order::all()->where('order_number','=',$order)->where('status','=','รอการยืนยัน');
-        foreach ($orders as $o){
-            $o->status = 'กำลังจัดส่ง';
-            $o->save();
-        }
+        $find_update_delivery = Order::find($order);
+        $find_update_delivery->status = 'กำลังจัดส่ง';
+        $find_update_delivery->save();
+
         return redirect()->route('order.edit')->with('message','Confirm Order');
     }
 
     public function orderConfirm($order)
     {
-        $orders = Order::all()->where('order_number','=',$order)->where('status','=','กำลังจัดส่ง');
-        foreach ($orders as $o){
-            $o->status = 'เรียบร้อย';
-            $o->save();
-        }
+        $find_update_success = Order::find($order);
+        $find_update_success->status = 'เรียบร้อย';
+        $find_update_success->save();
+
         return redirect()->route('order.edit')->with('message','Confirm Order');
     }
 
     public function deleteFormOrderID($order)
     {
-        $orders = Order::all()->where('order_number','=',$order)->where('status','=','รอการยืนยัน');
-        foreach ($orders as $o){
+        $orderLists = OrderList::all()->where('order_id','=',$order);
+        foreach ($orderLists as $o){
             $o->delete();
         }
+//        dd($order);
+        $find_delete = Order::find($order);
+        $find_delete->delete();
         return redirect()->route('order.edit')->with('info','Successfully');
 
     }
