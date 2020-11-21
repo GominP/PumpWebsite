@@ -17,11 +17,11 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users');
 //            $table->foreignId('product_id')->nullable()->constrained('products');
-            $table->integer('quantity');
 //            $table->integer('order_number')->nullable();
-            $table->enum('status',['อยู่ในตะกร้า','รอการยืนยัน','กำลังจัดส่ง','เรียบร้อย']);
-            $table->date('order_start_date');
-            $table->date('order_end_date');
+            $table->integer('order_number')->nullable();
+            $table->enum('status',['ตะกร้า','รอการยืนยัน','กำลังจัดส่ง','เรียบร้อย']);
+            $table->date('order_start_date')->nullable();
+            $table->date('order_end_date')->nullable();
 
             $table->timestamps();
         });

@@ -24,16 +24,6 @@ Route::get('/service', 'HomeController@service')->name('service');
 Route::get('/about', 'HomeController@about')->name('about');
 
 
-//Products
-Route::resource('/product','ProductController');
-//Route::get('/allProduct/{type_id}', 'ProductController@index')->name('product.index');
-Route::get('/allProduct/{product_id}/show', 'ProductController@show')->name('product.show');
-Route::get('/allProduct/{product_id}/edit', 'ProductController@editProduct')->name('product.show.edit');
-Route::put('/allProduct/{product_id}/update', 'ProductController@updateProduct')->name('product.show.update');
-
-
-
-
 //Orders
 Route::resource('/order','OrderController');
 Route::post('/addOrder', 'OrderController@store')->name('order.store');
@@ -44,6 +34,14 @@ Route::put('/order_cart','OrderController@order')->name('order.cart.update');
 Route::put('/order_confirm{order}','OrderController@orderConfirm')->name('order.confirm.update');
 Route::put('/order_delivery{order}','OrderController@orderDelivery')->name('order.delivery.update');
 Route::delete('/order_delete/{order}','OrderController@deleteFormOrderID')->name('order.delete.num');
+
+
+//Products
+Route::resource('/product','ProductController');
+//Route::get('/allProduct/{type_id}', 'ProductController@index')->name('product.index');
+Route::get('/allProduct/{product_id}/show', 'ProductController@show')->name('product.show');
+Route::get('/allProduct/{product_id}/edit', 'ProductController@editProduct')->name('product.show.edit');
+Route::put('/allProduct/{product_id}/update', 'ProductController@updateProduct')->name('product.show.update');
 
 
 

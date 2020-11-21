@@ -25,33 +25,79 @@
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="card-body">
                     <div class="tab-pane fade show " id="wait" role="tabpanel" aria-labelledby="report-tab">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-8">
+                                    <table class="table table-hover text-center" name="tableDelivery">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Price</th>
 
-                        <table class="table table-hover text-center" name="tableDelivery">
-                            <thead>
-                            <tr>
-                                <th scope="col">Product Name</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Price</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($orders as $order)
+                                            <tr>
+                                                <td>{{$order->product->name}}</td>
+                                                <td>{{$order->quantity}}</td>
+                                                <td>{{$order->product->price}} Baht</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-4">
+                                    <h3>Contact</h3>
+                                    <table class="table table-sm">
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="2">Name : </td>
+                                            <td>{{ $user->name }}</td>
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($orders as $order)
-                                <tr>
-                                    <td>{{$order->product->name}}</td>
-                                    <td>{{$order->quantity}}</td>
-                                    <td>{{$order->product->price}} Baht</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <td>Total</td>
-                                <td></td>
-                                <td colspan="3">{{ $total }} Baht</td>
-                            </tr></tfoot>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Phone :</td>
+                                            <td>{{ $user->phone_number }}</td>
 
-                        </table>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Address</td>
+                                            <td>{{ $user->address }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <h3>Receipt</h3>
+                                    <table class="table table-sm">
+                                        <tbody>
+                                        <tr>
+                                            <td>total</td>
+                                            <td colspan="2"></td>
+                                            <td class="text-right">{{number_format($total)}}</td>
+                                        </tr>
+                                        <tr >
+                                            <td>vat 7%</td>
+                                            <td colspan="2"></td>
+                                            <td class="text-right">{{number_format($total*0.07)}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>delivery</td>
+                                            <td colspan="2"></td>
+                                            <td class="text-right">{{number_format(80)}}</td>
+                                        </tr>
+                                        <tr >
+                                            <td>total</td>
+                                            <td colspan="2"></td>
+                                            <td class="text-right">{{number_format($total*0.07+$total+80)}} Baht</td>
+                                        </tr>
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Order;
 use App\OrderList;
 use App\Product;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -18,26 +20,32 @@ class OrderController extends Controller
     public function index()
     {
         $user = Auth::id();
-        $order = Order::all()->where('user_id','=',$user)->where('status','=','อยู่ในตะกร้า');
-        $ol = DB::table('orders')->select('order_number')->distinct('order_number')
-                                ->where('user_id','=',$user)
-                                ->where('status','=','รอการยืนยัน')->get();
+        $check = Order::all()->where('user_id','=',$user)->where('status','=','ตะกร้า')->first();
+        if ($check === null){
+            $check = new Order();
+            $check->user_id = $user;
+            $check->status = 'ตะกร้า';
+            $check->save();
+        }
+        $amoutPrice = 0;
+        $orders = OrderList::all()->where('order_id','=',$check->id);
+        $waits = Order::all()->where('user_id','=',$user)->where('status','=','รอการยืนยัน');
+        foreach ($orders as $order){
+            $temp = 0;
+            $temp += $order->price * $order->quantity;
+            $amoutPrice += $temp;
+        }
+        $delivery = Order::all()->where('user_id','=',$user)->where('status','=','กำลังจัดส่ง');
+        $success = Order::all()->where('user_id','=',$user)->where('status','=','เรียบร้อย');
 
-        $delivery = DB::table('orders')->select('order_number')->distinct('order_number')
-            ->where('user_id','=',$user)
-            ->where('status','=','กำลังจัดส่ง')->get();
-
-        $success = DB::table('orders')->select('order_number')->distinct('order_number')
-            ->where('user_id','=',$user)
-            ->where('status','=','เรียบร้อย')->get();
-
-
-        return view('order.index',[
-        'order_lists' => $order,
-            'delivery' => $delivery,
-            'success' => $success,
-            'ol'=> $ol
-        ]);
+        return view('order.index', [
+                'order_lists' => $orders,
+                'waits' => $waits,
+                'delivery' => $delivery,
+                'success' => $success,
+                'amoutPrice'=> $amoutPrice
+                ]
+        );
     }
 
     /**
@@ -61,21 +69,28 @@ class OrderController extends Controller
         $validatedData = $request->validate([
             'amount' => 'required|min:1'
         ]);
+        $user = Auth::id();
+        $check = Order::all()->where('user_id','=',$user)->where('status','=','ตะกร้า')->first();
+//        dd($check);
+        if ($check === null){
+            $check = new Order();
+            $check->user_id = $user;
+            $check->status = 'ตะกร้า';
+            $check->save();
+        }
 
         $item = Product::findOrFail($request->input('p_id'));
-        $user = Auth::id();
 
-        $order = new Order();
-        $order->user_id = $user;
-        $order->product_id =$item->id;
-        $order->quantity= $request->input('amount');
-        $order->status = "อยู่ในตะกร้า";
-        $order->order_start_date = Carbon::today();
-        $order->order_end_date = Carbon::today()->addDay(3);
-        $order->save();
+        $cart = new OrderList();
+        $cart->product_id =$item->id;
+        $cart->order_id =$check->id;
+        $cart->price =$item->price;
+        $cart->quantity= $request->input('amount');
+        $cart->save();
 
-
-        return redirect()->route('product.index',['type_id' => 'VARVEL'])->with('message','Successfully');
+        //        $order->order_start_date = Carbon::today();
+//        $order->order_end_date = Carbon::today()->addDay(3);
+        return redirect()->route('product.index')->with('message','Successfully');
 
 
     }
@@ -88,17 +103,24 @@ class OrderController extends Controller
      */
     public function show($order)
     {
-        $user = Auth::id();
-        $orders = Order::all()->where('order_number','=',$order);
+        $orders = OrderList::all()->where('order_id','=',$order);
         $total = 0 ;
+//        $o_id = OrderList::all()->where('order_id','=',$order)->first();
+        $find = Order::find($order);
+        $user = User::find($find->user_id);
+
         foreach ($orders as $order){
-            $temp = $order->product->price * $order->quantity;
+            $temp = 0;
+            $temp += $order->product->price*$order->quantity;
             $total += $temp;
         }
 
+
+
         return view('order.show',[
             'orders' => $orders,
-            'total' => $total
+            'total' => $total,
+            'user'=> $user
         ]);
     }
 
@@ -133,9 +155,8 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        $req = Order::findOrFail($id);
+        $req = OrderList::find($id);
         $req->delete();
-        $user = Auth::id();
         return redirect()->route('order.index');
 
     }
@@ -143,13 +164,13 @@ class OrderController extends Controller
     public function order()
     {
         $user = Auth::id();
-        $order = Order::all()->where('user_id','=',$user)->where('status','=','อยู่ในตะกร้า');
-        $number = rand(1000,9999);
-        foreach ($order as $o){
-            $o->order_number = $number;
-            $o->status = 'รอการยืนยัน';
-            $o->save();
-        }
+        $order = Order::all()->where('user_id','=',$user)->where('status','=','ตะกร้า')->first();
+        $order_lists = OrderList::all()->where('order_id','=',$order->id);
+        $number = rand(000000,999999);
+
+        $order->order_number = $number;
+        $order->status = 'รอการยืนยัน';
+        $order->save();
 
 //        $orderL = new OrderList();
 //        $orderL->user_id = $user;

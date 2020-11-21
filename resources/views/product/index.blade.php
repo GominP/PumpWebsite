@@ -13,21 +13,6 @@
                     @endforeach
 
                 </div>
-{{--                <div class="card "  name="cardProductMenu"style="width: 18rem;">--}}
-{{--                    <div class="card-header">--}}
-{{--                        Products--}}
-{{--                    </div>--}}
-{{--                    <ul class="list-group list-group-flush">--}}
-{{--                        @foreach($products as $product)--}}
-
-{{--                        <li class="list-group-item " name="typeMenu">--}}
-{{--                            <a href="{{ route('product.index',['type_id' => $product->type]) }}">{{ $product->type }}</a>--}}
-{{--                        </li>--}}
-
-{{--                        @endforeach--}}
-{{--                    </ul>--}}
-{{--                </div>--}}
-
 
             </div>
             <div class="col-8">
@@ -95,7 +80,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Amount</span>
                             </div>
-                            <input type="number" min="1" max="50" name="amount"  id="amount" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input type="number" min="1" max="50" name="amount"  id="amount" class="form-control" aria-label="Amount (to the nearest dollar)" required>
                             <div class="input-group-prepend">
                                 <span class="input-group-text">unit</span>
                             </div>
