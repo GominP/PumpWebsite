@@ -207,7 +207,7 @@ class OrderController extends Controller
         $find_update_success->status = 'เรียบร้อย';
         $find_update_success->save();
 
-        return redirect()->route('order.edit')->with('message','Confirm Order');
+        return redirect()->route('order.edit')->with('message','Delivered');
     }
 
     public function deleteFormOrderID($order)
@@ -215,6 +215,8 @@ class OrderController extends Controller
         $orderLists = OrderList::all()->where('order_id','=',$order);
         foreach ($orderLists as $o){
             $o->delete();
+
+            jdasdnjasdnasjdsnadkjasndajkdndkjadsjkdnaskjd
         }
 //        dd($order);
         $find_delete = Order::find($order);

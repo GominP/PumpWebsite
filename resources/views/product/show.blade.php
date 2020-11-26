@@ -21,13 +21,24 @@
             </div>
             <div class="col-8">
                 <div class="card" >
-                    <img class="card-img-top" width="200" height="500" src="{{asset( $item->img )}}" alt="Card image cap">
+                    <img class="card-img-top" width="" height="350" src="{{asset( $item->img )}}" alt="Card image cap">
                     <div class="card-body">
-                        <p>Name : {{ $item->name }}</p>
-                        <p>Price : {{ $item->price }} Baht.</p>
-                        <p>Type : {{ $item->type }}</p>
-                        <p></p>
-                        <p class="card-text">Detail : {{ $item->detail }}</p>
+                        <dl class="row">
+                            <dt class="col-sm-2">Name :</dt>
+                            <p class="col-sm-10">{{ $item->name }}</p>
+
+                            <dt class="col-sm-2">Price :</dt>
+                            <p class="col-sm-10">
+                                {{ number_format( $item->price) }} Baht.
+                            </p>
+
+                            <dt class="col-sm-2">Type :</dt>
+                            <dd class="col-sm-10">{{ $item->type }}</dd>
+
+                        </dl>
+                        <dt class="col-sm- text-truncate">Detail :</dt>
+                        {{ $item->detail }}
+
                     </div>
                 </div>
 
